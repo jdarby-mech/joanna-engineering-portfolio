@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joanna A. Darby — Mechanical Engineering Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ---------- Tokens ---------- */
+    :root {
+      --bg: #FDFBF7;
+      --ink: #1A1A1A;
+      --ink-soft: #2b2b2b;
+      --muted: #6a6a6a;
+      --line: #ebe6dd;
+      --line-strong: #d8d2c5;
+      --card: #ffffff;
+      --crimson: #CC0000;
+      --blush: #E8C5C8;
+      --blush-soft: #f4dde0;
+      --blush-tint: #faecee;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 36px; }
+    section { padding: 96px 0; border-top: 1px solid var(--line); }
+    h1, h2, h3, h4, h5 {
+      font-family: "Inter", "Helvetica Neue", sans-serif;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .mono { font-family: "JetBrains Mono", monospace; }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      margin: 0 0 36px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--ink);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero { padding: 112px 0 96px; border-top: none; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(44px, 6.4vw, 76px);
+      line-height: 0.98;
+      margin: 0 0 18px 0;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+    .hero .subtitle {
+      font-size: 17px;
+      color: var(--ink-soft);
+      margin: 0 0 22px 0;
+      font-weight: 500;
+    }
+    .hero .tagline {
+      font-size: 19px;
+      color: var(--ink);
+      font-weight: 600;
+      max-width: 580px;
+      margin: 0 0 20px 0;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      border-left: 2px solid var(--blush);
+      padding-left: 16px;
+    }
+    .hero .bio {
+      font-size: 16.5px;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 0 34px 0;
+    }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      background: #fff;
+      text-decoration: none;
+      transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    }
+    .pill:hover {
+      border-color: var(--blush);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .headshot-frame {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1.5px solid var(--blush);
+      background: #fff;
+    }
+    .headshot-frame::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(232, 197, 200, 0.55);
+      border-radius: 3px;
+      pointer-events: none;
+    }
+    .headshot-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ---------- Projects ---------- */
+    .project {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+    }
+    .project:first-of-type { border-top: none; padding-top: 0; }
+    .project .index-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .project h3 {
+      font-size: 28px;
+      margin: 0 0 8px 0;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+    }
+    .project .role {
+      font-size: 14px;
+      color: var(--crimson);
+      font-weight: 600;
+      margin: 0 0 22px 0;
+      letter-spacing: 0.01em;
+    }
+    .project p { margin: 0 0 14px 0; color: var(--ink-soft); font-size: 15.5px; }
+    .project .label { font-weight: 700; color: var(--ink); }
+
+    /* Project body two-column inner layout (content + side panel) */
+    .project-body {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+    .project-body.full { grid-template-columns: 1fr; }
+
+    /* ---------- Spec Panel (decorative, honest) ---------- */
+    .spec-panel {
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: #fff;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .spec-panel::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 56px; height: 3px;
+      background: var(--blush);
+    }
+    .spec-panel h4 {
+      margin: 0 0 16px 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .spec-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+      font-size: 13px;
+    }
+    .spec-row:last-of-type { border-bottom: none; }
+    .spec-row .k {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 1px;
+    }
+    .spec-row .v { color: var(--ink); font-weight: 500; }
+    .spec-row .v .tag {
+      display: inline-block;
+      background: var(--blush-tint);
+      color: var(--ink);
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 12px;
+      margin: 2px 4px 2px 0;
+    }
+
+    /* Decorative blueprint corner inside panel */
+    .blueprint {
+      margin-top: 18px;
+      aspect-ratio: 4 / 3;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background:
+        linear-gradient(var(--blush-tint), var(--blush-tint)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 19px, rgba(26,26,26,0.06) 19px, rgba(26,26,26,0.06) 20px),
+        repeating-linear-gradient(90deg, transparent 0, transparent 19px, rgba(26,26,26,0.06) 19px, rgba(26,26,26,0.06) 20px);
+      background-blend-mode: multiply;
+      position: relative;
+    }
+    .blueprint::before, .blueprint::after {
+      content: "";
+      position: absolute;
+      width: 14px; height: 14px;
+      border: 1.5px solid var(--crimson);
+    }
+    .blueprint::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
+    .blueprint::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
+    .blueprint .stamp {
+      position: absolute;
+      bottom: 10px; left: 12px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* CTA Buttons */
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 14px 24px;
+      background: transparent;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--ink);
+      border-radius: 4px;
+      transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease, transform 0.22s ease;
+    }
+    .cta:hover {
+      background: var(--crimson);
+      border-color: var(--crimson);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .cta svg { display: block; transition: transform 0.22s ease; }
+    .cta:hover svg { transform: rotate(8deg) scale(1.05); }
+    .cta.secondary {
+      border-width: 1px;
+      padding: 12px 20px;
+      font-size: 13px;
+    }
+
+    /* 3-col image grid (REAL photos only) */
+    .image-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .image-grid figure {
+      margin: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    .image-grid img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      background: #f3eee5;
+    }
+    .image-grid figcaption {
+      padding: 14px 16px;
+      font-size: 12.5px;
+      color: var(--ink-soft);
+      border-top: 1px solid var(--line);
+      line-height: 1.45;
+    }
+
+    /* Status note (for in-progress projects) */
+    .status-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .status-note .dot {
+      width: 8px; height: 8px;
+      background: var(--crimson);
+      border-radius: 50%;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ---------- Skills Grid ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .skill-card {
+      background: var(--blush-tint);
+      border: 1px solid var(--blush-soft);
+      border-radius: 8px;
+      padding: 26px 24px;
+    }
+    .skill-card h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--crimson);
+      margin: 0 0 16px 0;
+      font-weight: 700;
+    }
+    .skill-card ul { list-style: none; padding: 0; margin: 0; }
+    .skill-card li {
+      font-size: 14px;
+      color: var(--ink-soft);
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(26,26,26,0.06);
+    }
+    .skill-card li:last-child { border-bottom: none; }
+
+    /* ---------- Timeline ---------- */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+    .timeline-col h4 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      margin: 0 0 22px 0;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-item {
+      border-left: 2px solid var(--blush);
+      padding: 6px 0 6px 22px;
+      margin-bottom: 18px;
+    }
+    .timeline-item h5 { margin: 0 0 6px 0; font-size: 18px; font-weight: 700; }
+    .timeline-item .meta { font-size: 13px; color: var(--muted); margin: 0 0 10px 0; }
+    .timeline-item p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+
+    /* ---------- Footer / Boneyard ---------- */
+    .boneyard {
+      background: var(--ink);
+      color: #f1eeec;
+      padding: 80px 0;
+      text-align: center;
+      border-top: 4px solid var(--crimson);
+    }
+    .boneyard h3 {
+      font-size: 24px;
+      margin: 0 0 14px 0;
+      color: #fff;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+    }
+    .boneyard p {
+      max-width: 680px;
+      margin: 0 auto;
+      color: #b8b3ad;
+      font-size: 15.5px;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .headshot-frame { margin: 0 auto; }
+      .project { grid-template-columns: 1fr; gap: 14px; padding: 48px 0; }
+      .project-body { grid-template-columns: 1fr; gap: 24px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-grid { grid-template-columns: 1fr; gap: 40px; }
+      .image-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. HERO -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>JOANNA A. DARBY</h1>
+        <p class="subtitle">Mechanical Engineering Student @ MUN | Biomedical &amp; Mechanical Design</p>
+        <p class="tagline">Driven by a passion for exploring how engineering can improve lives.</p>
+        <p class="bio">I love taking mechanical systems apart, understanding their constraints, and building physical hardware from scratch. From managing tight tolerances on components to designing space-constrained electronics for wearable biosensors, I apply a hands-on prototyping approach to turn complex concepts into functional, human-centered designs.</p>
+        <div class="pill-row">
+          <a class="pill" href="mailto:jdarby@mun.ca">jdarby@mun.ca</a>
+          <a class="pill" href="https://linkedin.com/in/joanna-darby-179b5b329" target="_blank" rel="noopener">linkedin.com/in/joanna-darby</a>
+          <a class="pill" href="tel:+14379865069">437-986-5069</a>
+        </div>
+      </div>
+      <div>
+        <div class="headshot-frame">
+          <img src="headshot.jpg" alt="Joanna A. Darby" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="eyebrow">Selected Projects</p>
+
+      <!-- PROJECT 01: F1TENTH -->
+      <div class="project">
+        <div class="index-label">Project 01</div>
+        <div>
+          <h3>F1TENTH Autonomous Racing Platform</h3>
+          <p class="role">Head Researcher &amp; Analyst · Sept 2024 – Nov 2024</p>
+          <div class="project-body">
+            <div>
+              <p><span class="label">Overview:</span> Led research and analysis for a lightweight, aerodynamic racecar cover on a 1/10-scale autonomous racing platform, improving vehicle efficiency by 12% in simulations.</p>
+              <p><span class="label">Execution:</span> Evaluated 10+ material options for durability and weight performance, selecting composite materials that reduced weight by 18%. Collaborated with 4 teammates to refine design specifications and ensure compliance with competition standards.</p>
+              <p><span class="label">Outcome:</span> Compiled findings in a 20+ page technical report and presented results, earning formal recognition during the project presentation.</p>
+              <a class="cta secondary" href="https://docs.google.com/presentation/d/1Hfh5OHBw-0j1yoir5-w_R1ilUDmB4WPiAPPCJgHh7Zk/edit?usp=sharing" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 7L7 17"/>
+                  <path d="M8 7h9v9"/>
+                </svg>
+                View Project Presentation
+              </a>
+            </div>
+            <aside class="spec-panel">
+              <h4>Platform</h4>
+              <div class="spec-row"><span class="k">Scale</span><span class="v">1/10 Autonomous Race Vehicle</span></div>
+              <div class="spec-row"><span class="k">Stack</span><span class="v"><span class="tag">Linux</span><span class="tag">Python</span><span class="tag">DAQ</span></span></div>
+              <div class="spec-row"><span class="k">Weight</span><span class="v mono">−18% via composites</span></div>
+              <div class="spec-row"><span class="k">Efficiency</span><span class="v mono">+12% in simulation</span></div>
+              <div class="spec-row"><span class="k">Report</span><span class="v">20+ page technical write-up</span></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 02: HORIZON AEROSPACE -->
+      <div class="project">
+        <div class="index-label">Project 02</div>
+        <div>
+          <h3>Horizon Aerospace Rocket Stand</h3>
+          <p class="role">Aerostructures Team Member · Oct 2025 – Present</p>
+          <div class="project-body">
+            <div>
+              <p>Designed an avionics bay mount and modular rocket stand using SolidWorks and Onshape, fabricated via 3D printing and deployed for team testing and outreach events. Supported structural analysis and flight simulation using OpenRocket within a 12+ person multidisciplinary team.</p>
+              <a class="cta" href="https://www.horizon-aerospace.ca/team" target="_blank" rel="noopener">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 7L7 17"/>
+                  <path d="M8 7h9v9"/>
+                </svg>
+                View Horizon Aerospace Team
+              </a>
+            </div>
+            <aside class="spec-panel">
+              <h4>Project Spec</h4>
+              <div class="spec-row"><span class="k">Team</span><span class="v">Aerostructures · 12+ members</span></div>
+              <div class="spec-row"><span class="k">Tools</span><span class="v"><span class="tag">SolidWorks</span><span class="tag">Onshape</span><span class="tag">OpenRocket</span></span></div>
+              <div class="spec-row"><span class="k">Process</span><span class="v">3D Printing · Structural Analysis</span></div>
+              <div class="spec-row"><span class="k">Status</span><span class="v">Active · Deployed</span></div>
+            </aside>
+          </div>
+
+          <div class="image-grid">
+            <figure>
+              <img src="rocket-stand-profile.jpg" alt="Full assembly profile of the rocket stand" />
+              <figcaption>Full assembly profile view of the 3D-printed modular testing cradle and tripod base foundation.</figcaption>
+            </figure>
+            <figure>
+              <img src="rocket-stand-base.jpg" alt="Underside of the tripod base" />
+              <figcaption>Underside view of the tripod base, illustrating structural load distribution and integrated grip points.</figcaption>
+            </figure>
+            <figure>
+              <img src="rocket-stand-tolerance.jpg" alt="Close-up of the cradle interface" />
+              <figcaption>Close-up interface detail showing tight slip-fit tolerances managed between separate printed components.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 03: DC MOTOR (ONSHAPE) -->
+      <div class="project">
+        <div class="index-label">Project 03</div>
+        <div>
+          <h3>DC Motor Assembly Reverse Engineering</h3>
+          <p class="role">Reverse Engineering &amp; Drawing Approval · Oct 2025 – Nov 2025</p>
+          <div class="project-body">
+            <div>
+              <p><span class="label">Context:</span> Performed a comprehensive teardown and analysis in MUN's Production Technology lab to translate a physical, legacy DC motor assembly into high-fidelity, manufacturing-ready documentation without existing reference blueprints.</p>
+              <p><span class="label">Execution:</span> Disassembled and measured physical components using precision instruments. Transformed physical data into a complete parametric assembly and produced formal engineering drawings in Onshape—including isometric, section, and dimensioned views with material callouts and geometric tolerances for critical components like Gear 1 (P13-7-1, Steel 1020).</p>
+              <p><span class="label">Impact:</span> Documented exact measured gear geometry (Ø24.5 mm OD, Ø20.9 mm ID, 7.9 mm width) with section views and material specifications.</p>
+
+              <a class="cta" href="https://cad.onshape.com/documents/9ee115a1f98d388400c284b2/w/3f339e6010515b0057a6e2c0/e/1aad7993419fd2019a760c2f" target="_blank" rel="noopener">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                Launch Interactive Onshape 3D Model
+              </a>
+            </div>
+            <aside class="spec-panel">
+              <h4>Drawing Spec — Gear 1</h4>
+              <div class="spec-row"><span class="k">Part No.</span><span class="v mono">P13-7-1</span></div>
+              <div class="spec-row"><span class="k">Material</span><span class="v">Steel 1020</span></div>
+              <div class="spec-row"><span class="k">OD</span><span class="v mono">Ø24.5 mm</span></div>
+              <div class="spec-row"><span class="k">ID</span><span class="v mono">Ø20.9 mm</span></div>
+              <div class="spec-row"><span class="k">Width</span><span class="v mono">7.9 mm</span></div>
+              <div class="spec-row"><span class="k">Views</span><span class="v">Iso · Section · Dimensioned</span></div>
+              <div class="spec-row"><span class="k">GD&amp;T</span><span class="v">Geometric tolerances on critical fits</span></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 04: BIOSENSOR -->
+      <div class="project">
+        <div class="index-label">Project 04</div>
+        <div>
+          <h3>Passive Wearable Biosensing Device</h3>
+          <p class="role">Lead Hardware Architect &amp; Founder · May 2026 – Present</p>
+          <div class="project-body">
+            <div>
+              <p>Designing a continuous health-monitoring wearable concept as an independent hardware initiative. Engineering space-constrained packaging in SolidWorks, balancing Lithium-ion battery volumetric energy density against strict thermal dissipation limits for continuous skin contact.</p>
+              <div class="status-note"><span class="dot"></span>In Development · Build Documentation in Progress</div>
+            </div>
+            <aside class="spec-panel">
+              <h4>Design Brief</h4>
+              <div class="spec-row"><span class="k">Form</span><span class="v">Passive · Skin-contact wearable</span></div>
+              <div class="spec-row"><span class="k">Tools</span><span class="v"><span class="tag">SolidWorks</span><span class="tag">Thermal FEA</span></span></div>
+              <div class="spec-row"><span class="k">Constraints</span><span class="v">Battery density vs. thermal dissipation</span></div>
+              <div class="spec-row"><span class="k">Target</span><span class="v">Independent hardware concept</span></div>
+              <div class="blueprint"><span class="stamp">Concept · CONFIDENTIAL</span></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 05: ARDUINO DOORBELL -->
+      <div class="project">
+        <div class="index-label">Project 05</div>
+        <div>
+          <h3>Electromechanical Doorbell System</h3>
+          <p class="role">Programmer · Nov 2024 – Dec 2024</p>
+          <div class="project-body">
+            <div>
+              <p>Programmed a Python + Arduino doorbell system detecting button presses, triggering alerts, and sending email notifications, reducing missed visitor alerts by 99%. Collaborated with teammates to resolve 25+ hardware-in-the-loop debugging errors to ensure system reliability. Documented technical specifications in a formal report and presented findings to faculty.</p>
+            </div>
+            <aside class="spec-panel">
+              <h4>System Spec</h4>
+              <div class="spec-row"><span class="k">Stack</span><span class="v"><span class="tag">Python</span><span class="tag">Arduino</span></span></div>
+              <div class="spec-row"><span class="k">I/O</span><span class="v">Button input · Email alerts</span></div>
+              <div class="spec-row"><span class="k">Reliability</span><span class="v mono">99% delivery</span></div>
+              <div class="spec-row"><span class="k">Debug</span><span class="v">25+ HIL issues resolved</span></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. TECH SPECIFICATIONS -->
+  <section id="skills">
+    <div class="container">
+      <p class="eyebrow">Tech Specifications</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h4>CAD &amp; Design</h4>
+          <ul>
+            <li>SolidWorks</li>
+            <li>Onshape</li>
+            <li>AutoCAD</li>
+            <li>Inventor</li>
+            <li>OpenRocket</li>
+            <li>GD&amp;T</li>
+            <li>Mechanical Drawings</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>Prototyping &amp; Shop</h4>
+          <ul>
+            <li>Additive Manufacturing (3D Printing)</li>
+            <li>Manual Mill &amp; Lathe</li>
+            <li>Welding</li>
+            <li>Assembly</li>
+            <li>Reverse Engineering</li>
+            <li>Precision Measurement (Calipers, Micrometers)</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>Programming &amp; Systems</h4>
+          <ul>
+            <li>Python</li>
+            <li>Arduino</li>
+            <li>Linux</li>
+            <li>Data Acquisition (DAQ)</li>
+          </ul>
+        </div>
+        <div class="skill-card">
+          <h4>Project Management &amp; Analysis</h4>
+          <ul>
+            <li>Microsoft Project</li>
+            <li>Agile Methods</li>
+            <li>Team Leadership</li>
+            <li>Technical Writing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. EXPERIENCE & EDUCATION -->
+  <section id="timeline">
+    <div class="container">
+      <p class="eyebrow">Experience &amp; Education</p>
+      <div class="timeline-grid">
+        <div class="timeline-col">
+          <h4>Education</h4>
+          <div class="timeline-item">
+            <h5>Memorial University of Newfoundland (MUN)</h5>
+            <p class="meta">Bachelor of Engineering, Major in Mechanical Engineering · Expected May 2029</p>
+          </div>
+        </div>
+        <div class="timeline-col">
+          <h4>Experience</h4>
+          <div class="timeline-item">
+            <h5>Transport Canada</h5>
+            <p class="meta">Student Project Assistant — Marine Safety &amp; Security · Jan 2026 – Apr 2026</p>
+            <p>Applied engineering judgment to evaluate safety-critical regulatory frameworks submitted to IMO conferences, contributing to Canada's official positions on marine safety. Researched and analyzed alternative regulatory frameworks, comparing options and summarizing findings for senior staff. Supported a 10-person team across research, writing, and document management within Transport Canada's marine safety mandate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. THE BONEYARD -->
+  <footer class="boneyard">
+    <div class="container">
+      <h3>The Boneyard: Lessons from the Shop Floor</h3>
+      <p>Real engineering involves breaking things. Ask me about the 3D prints that warped, the circuits that fried, and exactly what structural adjustments I made to fix them on the next iteration.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
